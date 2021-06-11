@@ -1,3 +1,10 @@
+# Fork for Smarkets use
+
+This fork changes two things to the initial library:
+
+- send the countryCode as well for SCA compliance
+- requestPayment will return the full payment information (cardInfo, etc)
+
 
 # react-native-google-pay
 [![react-native version](https://img.shields.io/badge/react--native-0.41-0ba7d3.svg?style=flat-square)](https://github.com/facebook/react-native/releases/tag/v0.41.0)
