@@ -29,8 +29,46 @@ export interface RequestDataType {
     totalPrice: string
     totalPriceStatus: string
     currencyCode: string
+    countryCode: string
   }
   merchantName: string
+}
+
+export interface AddressType {
+  name?: string;
+  postalCode?: string;
+  countryCode?: string;
+  phoneNumber?: string;
+  address1?: string;
+  address2?: string;
+  address3?: string;
+  locality?: string;
+  administrativeArea?: string;
+  sortingCode?: string;
+}
+
+export interface AssuranceDetailsSpecificationsType {
+  accountVerified: boolean;
+  cardHolderAuthenticated: boolean;
+}
+
+export interface PaymentMethodTokenizationDataType {
+  type: string;
+  token?: string;
+}
+
+export interface CardInfoType {
+  assuranceDetails: AssuranceDetailsSpecificationsType;
+  cardDetails: string;
+  cardNetwork: string;
+  billingAddress?: AddressType;
+}
+
+export interface PaymentMethodDataType {
+  type: string;
+  description: string;
+  info: CardInfoType;
+  tokenizationData: PaymentMethodTokenizationDataType;
 }
 
 declare class GooglePay {
@@ -41,7 +79,7 @@ declare class GooglePay {
     allowedCardNetworks: AllowedCardNetworkType[],
     allowedCardAuthMethods: AllowedCardAuthMethodsType[]
   ) => Promise<boolean>
-  static requestPayment: (requestData: RequestDataType) => Promise<string>
+  static requestPayment: (requestData: RequestDataType) => Promise<PaymentMethodDataType>
 }
 
 export { GooglePay }

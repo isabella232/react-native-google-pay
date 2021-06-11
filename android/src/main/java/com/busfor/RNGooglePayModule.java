@@ -173,17 +173,10 @@ public class RNGooglePayModule extends ReactContextBaseJavaModule {
       requestPaymentPromise.reject("NULL_PAYMENT_INFORMATION", "paymentInformation is null");
       return;
     }
-    JSONObject paymentMethodData;
 
     try {
-      paymentMethodData = new JSONObject(paymentInformation).getJSONObject("paymentMethodData");
-      // If the gateway is set to "example", no payment information is returned - instead, the
-      // token will only consist of "examplePaymentMethodToken".
-
-      // Logging token string.
-      String token = paymentMethodData.getJSONObject("tokenizationData").getString("token");
-      requestPaymentPromise.resolve(token);
-    } catch (JSONException e) {
+      requestPaymentPromise.resolve(paymentInformation);
+    } catch (Exception e) {
       Log.e(TAG, "[GooglePay] handlePaymentSuccess error: " + e.toString());
       return;
     }
